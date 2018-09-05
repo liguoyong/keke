@@ -1,0 +1,94 @@
+body,
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+i,
+b,
+dl,
+dt,
+dd,
+ul,
+li,
+ol,
+em,
+tr,
+td {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: #f8f8f8;
+
+}
+
+body，input {
+    font: 14px/1.5 Helvetica, Tahoma, Arial, "Hiragino Sans GB", "Microsoft YaHei", SimSun, Heiti, sans-serif;
+}
+
+ul li {
+    list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+em,
+b {
+    font-style: normal;
+}
+
+img,
+a {
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+a:hover{
+    color:#f4604b;
+}
+input {
+    outline: none;
+}
+
+.clearfix:after {
+    content: ".";
+    height: 0;
+    visibility: hidden;
+    display: block;
+    clear: both;
+}
+
+.headbox {
+    z-index:10;
+    width: 100%;
+    min-width:960px;
+    height: 440px;
+    position: relative;
+}
+
+.header,.fixedBox {
+    z-index:999;
+    height: 70px;
+    min-width: 960px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.fixedBox{
+    position: fixed;
+    top:0;
+    background:#fff;
+    border: 1px solid #d4d4d4;
+    width:100%; 
+    display: none;
+}

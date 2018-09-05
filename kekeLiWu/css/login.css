@@ -1,0 +1,63 @@
+body,html{height:100%;width:100%;font-size:12px;background:#fff;}
+a {
+	display: block;
+	text-decoration: none;
+	color:#000;
+	font-size:12px;
+}
+b{
+	height: 0;
+	width: 0;
+	display: block;
+	border-left: 3px solid transparent;
+	border-right:3px solid transparent;
+	border-top: 3px solid #999;
+	float:right;
+	margin:12px 0 0 3px;
+				
+			}
+span,em{display: block;}
+em,i,h1,h2,h3,h4,h5,h6,b{font-style: normal;}
+input{outline:none;}
+button{outline: none;}
+.fr{float:right;}
+.fl{float:left;}
+
+.disNo{display:none;}
+.disBlock{display: block;}
+		.top{width:1190px;height:88px;margin:0 auto;}
+		.top>img{line-height: 88px;display: inline-block;vertical-align:middle;height:28px;}
+		.top>span{width:0;display: inline-block;height:100%;vertical-align: middle;}
+		.banner{width:100%;position:relative;background-color: rgb(1, 201, 253);}
+		.banner>img{margin:0 auto;height:600px;width:1190px;}
+		.banner .sub{height:348px;width:345px;position:absolute;right:80px;top:75px;background:#fff;}
+		.banner  .change{height:52px;width:52px;position:absolute;right: 5px;top:5px;}
+		.banner  .change i{font-size: 52px;color:red;}
+		.banner .change .border{height:0;width:0;border-bottom:52px solid #fff;border-right: 52px solid transparent;border-top: 0px solid transparent;position: absolute;z-index: 999;}
+		.banner .sub .login{width:298px;height:285px; padding: 25px 26px 20px;}
+		.banner .sub .login p:nth-child(1){height: 18px;line-height: 18px;font-size: 16px;color: #3c3c3c;margin-top: 9px; padding-bottom: 8px;font-weight: 700;}
+		.banner .sub .login p:nth-child(2){width:100%;}
+		#up>a{display: inline-block;padding:0 5px;line-height: 80px;color:#999;}
+		#up>a:hover{color:red;}
+		.banner .sub .login img{margin: 18px 76px;}
+		.banner .sub .login em{width:100%;height:36px;}
+		.banner .sub .login em i{float:left;font-size:30px;color:red;margin:0 10px 0 50px;line-height: 36px;}
+		.banner .sub .login em span{float:left;width:144px;line-height: 18px;color:#999;}
+		.banner .sub .login em span a{display: inline;color:red;}
+		.banner .pic{height:348px;width:345px;position:absolute;background:#fff;right:80px;top:75px;}
+		.banner .pic .line_up{width:298px;height:285px; padding: 25px 26px 20px;}
+		.banner .pic .line_up p{height: 18px;line-height: 18px;font-size: 16px;color: #3c3c3c;margin-top: 9px; padding-bottom: 8px;font-weight: 700;} 
+		.banner .pic .subT,
+		.banner .pic .pwdT,
+		.banner .pic .submit,
+		.banner .pic .submit{height:30px;width:240px;margin:0 auto;border:1px solid #ccc;margin-top: 25px;}
+		.banner .pic .subT img,
+		.banner .pic .pwdT img{float:left;height:30px;width:30px;}
+		.banner .pic  input{width:210px;border:0;outline:none;line-height: 28px;}
+		.banner .pic .line_up .upname{margin-top:15px;padding-left:30px;}
+		.banner .pic .submit #submit{width:242px;background-color:#ff0036;color:#fff;font-weight:bold;font-size: 14px;text-align: center;letter-spacing:5px;border:none;}
+		.banner .pic .tip{height:30px;width:100%;margin:25px auto;}
+		.banner .pic .tip ul{float:right;}
+		.banner .pic .tip ul li{float:left;padding-right:28px;}
+		.banner .pic .tip ul li a{color:#999;}
+		.banner .pic .tip ul li a:hover{color:red;}

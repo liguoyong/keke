@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>shopping trolley</title>
+	<link rel="stylesheet" href="css/shopcar.css">
+</head>
+
+<body>
+	<div class="top_list">
+		<div class="top">
+			<ul>
+				<li>
+					<a href="##" class="userhome">请登录</a>
+				</li>
+				<li>
+					<a href="##">消息</a>
+				</li>
+				<li>
+					<a href="##">手机逛淘宝</a>
+				</li>
+				<li>
+					<a href="page.html" target="_blank">可可礼物首页</a>
+				</li>
+				<li>
+					<a href="##">我的淘宝</a>
+				</li>
+				<li>
+					<a href="##">购物车</a>
+				</li>
+				<li>
+					<a href="##">收藏夹</a>
+				</li>
+				<li>
+					<a href="##">商品分类</a>
+				</li>
+				<li>
+					<a href="##">卖家中心</a>
+				</li>
+				<li>
+					<a href="##">联系客服</a>
+				</li>
+				<li>
+					<a href="##">网站导航</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="header top">
+		<img src="images/shoplogo.png">
+		<div class="search">
+			<div class="bb">宝贝</div>
+			<input type="text" name="text">
+			<button>搜索</button>
+		</div>
+	</div>
+	<div class="nav_list top">
+		<ul>
+			<li>
+				<a href="##">
+					<em>全部商品
+						<i>00</i>
+					</em>
+				</a>
+			</li>
+			<li>
+				<a href="##">
+					<em>特价商品
+						<i>00</i>
+					</em>
+				</a>
+			</li>
+			<li>
+				<a href="##">
+					<em>库存紧张
+						<i>00</i>
+					</em>
+				</a>
+			</li>
+		</ul>
+		<div class="nlist_right">
+			<p>
+				<span>已选商品（不含运费）</span>
+				<i>0.00</i>
+				<button>结 算</button>
+			</p>
+		</div>
+
+	</div>
+	<div class="selectAll top">
+		<input type="checkbox" name="checkbox">
+		<label for="all">全选</label>
+		<span>商品信息</span>
+		<ul>
+			<li>单价</li>
+			<li>数量</li>
+			<li>金额</li>
+			<li>操作</li>
+		</ul>
+	</div>
+	<div class="content top">
+		<!-- 	
+	<div class="shopping_car">
+	<div class="check1 top">
+		<input type="checkbox" name="checkbox">
+		<span>店铺：移动硬盘之家</span>
+	</div>
+	<div class="first_box top">
+		<input type="checkbox" name="checkbox">
+		<img src="https://img.alicdn.com/bao/uploaded/i1/1776740688/TB2DYselHXlpuFjy1zbXXb_qpXa_!!1776740688.jpg_80x80.jpg">
+		<span><i>高速USB3.0 移动硬盘</i><br/>80G/120G/160G/200G/250G/320G/500G/750/1T</span>
+		<div class="fb_center"><span>颜色分类：1TB硬盘</span><span>+USB3.0线+布套</span><span>套餐类型：官方标配</span></div>
+		<ul class="addshop">
+			<li><p></p><del>￥628.00</del></p>
+				<p>￥314.00</p></li>
+			<li class="addnum"><a>-</a><input value="4"><a>+</a></li>
+			<li class="price">￥1256.00</li>
+			<li>
+				<a>移入收藏夹</a>
+				<a>删除</a>
+			</li>
+		</ul>
+	</div>
+	</div> -->
+	</div>
+	<div class="occounts">
+
+	</div>
+</body>
+
+</html>
+<script>
+
+	function ajax() {
+		//获取localStorage,判断是哪里调到购物车
+		var str = localStorage.getItem('init') || '{}';//详情创建的
+		var utr = localStorage.getItem('userNum');//登录创建进去的
+		var user_shop = localStorage.getItem('shop_num');
+		var aob = JSON.parse(str);
+		var id = Object.keys(aob)[0] || utr;
+		var content = document.querySelector(".content");
+		var parmas = {
+			method: "GET",
+			url: "php/shopcar.php?id=" + id,
+			data: null,
+			success: function (json) {
+				var str = "";
+				var data = json.data;//获取的是总结果集，是数组
+				var shop_num = localStorage.getItem('shop_num');//每个用户对应购物车的商品列表
+				// 也可写成var shop_num = localStorage.shop_num;
+				var oFragmeng = document.createDocumentFragment();
+				if (!shop_num && !user_shop) {
+					str = `<div style="height:200px;text-align:center;" class="top"><p style="line-height:200px;font-size:24px;">您的购物车为空~~请加入购物车<p><div>`
+				} else {
+					var arr = [];
+					if (shop_num) {
+						arr = shop_num.split(',');//1,5,7,9,11,20,6字符串转数组
+					}
+
+					arr.push(id);//将购物车对应id的商品加入数组
+					var newarr = [];
+					//去掉数组中重复的部分
+					for (var j = 0; j < arr.length; j++) {
+						if (newarr.indexOf(arr[j]) == -1) {
+							newarr.push(arr[j]);
+						}
+					}
+					var local = newarr.join(',');
+					localStorage.setItem("shop_num", local);//增加了之后，在本地存储记录
+					//注意字符串拼接的方法性能很低，可以写一个空数组，用join的方法数组转字符串，插入页面
+					var sc = document.querySelectorAll('.shopping_car');
+					for (var i = 0; i < newarr.length; i++) {
+						str += `
+		<div class="shopping_car" >
+		<div class="check1 top">
+		<input type="checkbox" name="checkbox">
+		<span>店铺：${data[arr[i] - 1][1]}</span>
+	</div>
+	<div class="first_box top">
+		<input type="checkbox" name="checkbox">
+		<a href = 'http://localhost:8090/My_Obj_KeKe/keke/keke/details.html?id=${data[arr[i] - 1][0]}'><img src=${data[arr[i] - 1][2]}></a>
+		<span><a href='http://localhost:8090/My_Obj_KeKe/keke/keke/details.html?id=${data[arr[i] - 1][0]}'>${data[i][3]}</a></span>
+		<div class="fb_center">${data[arr[i] - 1][4]}</div>
+		<ul class="addshop">
+			<li class="doller"><p><del>￥${data[arr[i] - 1][5]}.00</del></p>
+				<p>￥${data[arr[i] - 1][6]}.00</p></li>
+			<li class="addnum"><a class="pricedown">-</a><input value="1" class="vla"><a class="priceadd">+</a></li>
+			<li class="price">￥${data[arr[i] - 1][7]}.00</li>
+			<li>
+				<a>移入收藏夹</a>
+				<a class="deleteBox" href="##" data-url=${data[arr[i] - 1][0]}>删除</a>
+			</li>
+		</ul>
+	</div>
+	</div>`;//删除节点时要用slice;	
+					}
+				}
+				content.innerHTML = str;
+				oFragmeng.appendChild(content);
+				document.body.appendChild(oFragmeng);
+			}
+		}
+		var xhr = new XMLHttpRequest;
+		xhr.open(parmas.method, parmas.url, true);
+		xhr.send(parmas.data);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var json = xhr.responseText;
+				json = JSON.parse(json);
+				parmas.success(json);
+				var shoplist = new shopList();//实例化执行的面向对象函数
+			}
+		}
+	}
+	ajax();
+
+
+	function shopList(){
+		this.fb = document.querySelectorAll(".content .fb_center");
+		this.userhome = document.querySelector('.userhome');
+		this.content = document.querySelector('.content');
+		this.pricedown = document.querySelectorAll('.pricedown');
+		this.priceadd = document.querySelectorAll('.priceadd');
+		this.deleteBox = document.querySelectorAll('.deleteBox');
+		this.shopNumber = localStorage.getItem("shop_num") || '';//获取本地number
+		this.shopObj = localStorage.getItem("shopObj") || '';//获取价格对象
+		// thi.strshopObj = JSON.stringify(this.shopObj)||{};
+		this.vlu = document.querySelectorAll('.vla');
+		this.vla = document.querySelector('.val');
+		this.init();
+	}
+	shopList.prototype.init = function () {
+		this.orange();
+		this.priceDown();
+		//插入本地用户名
+		var str = localStorage.getItem('username');
+		if (str) {
+			this.userhome.innerHTML = str;
+		}
+
+	}
+	//点击橙色事件
+	shopList.prototype.orange = function () {
+		for (var i = 0; i < this.fb.length; i++) {
+			this.fb[i].onmousedown = function (ev) {
+				var ev = ev || window.event;
+				var target = ev.target || e.srcElement;
+				this.style.border = "1px dashed orange";
+			}
+			this.fb[i].onmouseout = function () {
+				this.style.border = "1px solid transparent";
+			}
+		}
+	}
+
+	shopList.prototype.priceDown = function () {
+		var _this = this;
+		for (var i = 0; i < this.pricedown.length; i++) {
+			//降价事件
+			this.pricedown[i].onclick = function () {
+				var jianjian = this.nextElementSibling.value-1;//获取减减时本地vakue数据的改变
+				var dtNumber = this.parentNode.nextSibling.nextSibling.nextElementSibling.children[1].getAttribute("data-url");
+				_this.shopObj[dtNumber] = jianjian;
+				localStorage.setItem("shopObj",strjson);
+				if (this.nextElementSibling.value <= 1) {
+					this.nextElementSibling.value = 1;
+				} else {
+					this.nextElementSibling.value--;
+					var number = this.parentNode.parentNode.children[0].children[1].innerHTML.split('￥')[1];
+					this.parentNode.nextElementSibling.innerHTML = "￥" + number * this.nextElementSibling.value + ".00";
+					
+				}
+			}
+			//升价事件
+			this.priceadd[i].onclick = function () {
+				this.previousSibling.value++;
+				var number = this.parentNode.parentNode.children[0].children[1].innerHTML.split('￥')[1];
+				this.parentNode.parentNode.children[2].innerHTML = "￥" + number * this.previousSibling.value + ".00";
+			}
+
+		}
+		// this.content.onclick= function(ev){
+		// 	var ev = ev || window.event;
+		// 	var target = ev.target||ev.srcElement;
+		// 	if(target.tagName == "A" && target.className == "deleteBox"){
+		// 		var numbox =  target.parentNode.parentNode.parentNode.parentNode;
+		// 		console.log(numbox)
+		// 		_this.content.removeChild(_this.content.numbox);
+		// }
+		// }
+		//删除事件
+		for (var k = 0; k < this.deleteBox.length; k++) {
+			this.deleteBox[k].index = k;//记录下标
+			this.deleteBox[k].addEventListener("click", function () {
+				//找到自定义属性
+				var dataNum = this.getAttribute("data-url");
+				var reg = /^.*[\,，].*$/;
+				var shopNumber = localStorage.getItem("shop_num") || '';
+				var shopArr = shopNumber.split(",");
+				var newshopArr = [];
+				// 用有没有逗号，判断是否为最后一个								
+				if (reg.test(shopNumber)) {
+					for (var j = 0; j < shopArr.length; j++) {
+						shopArr[j].index = j;
+						if (shopArr[j] === dataNum) {
+							console.log(j)
+							var newshopArr = shopArr.splice(j, 1);
+							localStorage.setItem("shop_num", shopArr);
+							_this.content.removeChild(_this.content.children[j]);
+						}
+					}
+				} else {
+					localStorage.removeItem("shop_num");
+					_this.content.removeChild(_this.content.children[0]);
+
+				}
+			})
+
+		}
+		//传递velue值
+		
+		//获取所有的value框	
+		var obj = {};
+		for(var i =0;i<this.vlu.length;i++){
+			var arr = this.shopNumber.split(',')
+			obj[arr[i]]=this.vlu[i].value;
+			localStorage.setItem("shopObj",obj[arr[i]]);
+			this.vlu[i].index = i;
+			this.vlu[i].onchange = function(){
+				obj[arr[this.index]] = this.value;
+				var strjson = JSON.stringify(obj);
+				localStorage.setItem("shopObj",strjson);
+			}
+						
+		}
+		
+}
+</script>
